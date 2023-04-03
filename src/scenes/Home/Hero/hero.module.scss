@@ -1,0 +1,32 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  margin-top: 5vmax;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid red;
+
+  @include s.margin(top, 6rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local {
+
+    .wrapper {
+      max-width: 86rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+
+      border: 1px solid red;
+    }
+
+    .text{
+      //display: flex;
+      //flex-flow: column;
+    }
+
+    .form{
+
+    }
+  }
+}
