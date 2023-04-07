@@ -3,9 +3,10 @@
 .container {
   position: relative;
   width: 100%;
-  padding: 4rem 2rem 4rem;
+  padding:  8rem 4rem 6rem 2rem;
   margin-top: 16vmax;
-  //background-color: #F4F8FF;
+  z-index: 1111;
+  background-color: #e1e1e1;
 
   //border: 1px solid red;
 
@@ -37,7 +38,10 @@
       align-items: center;
       gap: 2.5rem;
       max-width: 100rem;
-      margin: 0 auto;
+      width: 100%;
+      margin-left: auto;
+
+      //border: 1px solid red;
 
       .top {
         width: 100%;
@@ -45,6 +49,16 @@
         flex-flow: column;
         justify-content: space-between;
         align-items: center;
+
+        h2{
+          line-height: 100%;
+        }
+
+        button {
+          margin-top: auto;
+          color: black;
+          border-color: black;
+        }
 
         //border: 1px solid red;
 
@@ -81,12 +95,7 @@
           }
         }
 
-        .pages {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          margin-top: 4rem;
-        }
+
       }
 
       .divider {
@@ -94,9 +103,52 @@
         height: 1px;
         //background-color: #f6ddd8;
         border-bottom: 2px dashed gray;
-
       }
 
+      .middle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        //border: 1px solid yellow;
+
+        .pages {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+          gap: 4rem;
+          row-gap: .7rem;
+          //margin-top: 4rem;
+          width: max-content;
+        }
+
+        .contact {
+          .contact_item {
+            display: flex;
+            flex-flow: column;
+          }
+
+          .social {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: .5rem;
+            margin-left: -.7rem;
+          }
+        }
+
+        .address {
+          display: flex;
+          flex-flow: column;
+          //text-align: center;
+          //gap: .5rem;
+
+          & > :last-child{
+            margin-top: 1rem;
+          }
+        }
+      }
 
       .bottom {
         display: flex;
@@ -113,14 +165,6 @@
           gap: 0;
         }
 
-        .address {
-          display: flex;
-          flex-flow: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          gap: 2rem;
-        }
 
         .us {
           display: flex;

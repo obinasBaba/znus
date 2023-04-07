@@ -1,15 +1,19 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 
 export interface State {
   pathname: string;
+  navBar: boolean;
+  navMenu: boolean;
 }
 
 const initialState = {
   pathname: 'sld',
+  navBar: true,
+  navMenu: false,
 };
 
 type Action = {
-  type: 'SHOW_NAV_BAR';
+  type: 'OPEN_NAV_MENU' | 'CLOSE_NAV_MENU';
 };
 
 export const AppContext = React.createContext<State | any>(initialState);
@@ -18,12 +22,18 @@ AppContext.displayName = 'UIContext';
 
 function uiReducer(state: State, action: Action) {
   switch (action.type) {
-    /*case 'DARKEN_NAV_BAR': {
+    case 'OPEN_NAV_MENU': {
       return {
         ...state,
-        darkNavBar: true,
+        navMenu: true,
       };
-    } */
+    }
+    case 'CLOSE_NAV_MENU': {
+      return {
+        ...state,
+        navMenu: false,
+      };
+    }
     default:
       return state;
   }
@@ -32,16 +42,25 @@ function uiReducer(state: State, action: Action) {
 const AppProvider: FC<{ children: React.ReactElement }> = (props) => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState);
 
-  // const showNavBar = () => dispatch({ type: 'SHOW_NAV_BAR' });
+  const openNavMenu = useCallback(
+    () => dispatch({ type: 'OPEN_NAV_MENU' }),
+    [dispatch],
+  );
+  const closeNavMenu = useCallback(
+    () => dispatch({ type: 'CLOSE_NAV_MENU' }),
+    [dispatch],
+  );
 
   const value = useMemo(
     () => ({
       ...state,
+      openNavMenu,
+      closeNavMenu,
     }),
     [state],
   );
 
-  return <AppContext.Provider value={{}} {...props} />;
+  return <AppContext.Provider value={value} {...props} />;
 };
 
 export default AppProvider;
@@ -52,5 +71,10 @@ export const useAppContext = () => {
     throw new Error('useUI must be used within a UIProvider');
   }
 
-  return context as State;
+  return context as State & {
+    showNavBar: () => void;
+    hideNavBar: () => void;
+    openNavMenu: () => void;
+    closeNavMenu: () => void;
+  };
 };

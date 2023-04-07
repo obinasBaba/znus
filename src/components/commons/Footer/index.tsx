@@ -1,88 +1,80 @@
 import React from 'react';
 import s from './footer.module.scss';
-import {
-  Button,
-  Divider,
-  InputAdornment,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { Email } from '@mui/icons-material';
+import { Button, Divider, IconButton, Typography } from '@mui/material';
+import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
+import Link from 'next/link';
+
+const socials = [LinkedIn, Facebook, Instagram, Twitter];
 
 const Footer = () => {
   return (
     <div className={s.container}>
       <div className={s.wrapper}>
         <div className={s.top}>
-          <div>
-            <div className={s.email_sub}>
-              <Typography variant="h5">Subscribe to our newsletter</Typography>
-              <Typography variant="body2" color="gray">
-                Be the first to know about our the newest stars and best deals
-                on Divo.
+          <Typography variant="h2">
+            Have an idea? <br />
+            Let&apos;s Build and <br />
+            Scale it!
+          </Typography>
+
+          <Button variant="outlined" size="large">
+            Start With Us
+          </Button>
+        </div>
+
+        <Divider className={s.divider} />
+
+        <div className={s.middle}>
+          <div className={s.pages}>
+            {[
+              'home',
+              'companies',
+              'FAQ',
+              'Terms & Conditions',
+              'Privacy Policy',
+              'Contact Us',
+            ].map((link, idx) => (
+              <Typography key={idx} className={s.link}>
+                {link}
               </Typography>
+            ))}
+          </div>
 
-              <TextField
-                className={s.email_field}
-                name="username"
-                label="Email"
-                placeholder="coming-soon"
-                type="email"
-                variant="outlined"
-                fullWidth
-                required
-                disabled
-                // value={formik.values.username}
-                // onChange={formik.handleChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Email />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+          <div className={s.contact}>
+            <div className={s.contact_item}>
+              <Typography> Let&apos;s Talk! </Typography>
+              <Typography color="gray" variant="caption">
+                hello@example.com
+              </Typography>
             </div>
-
-            <div className={s.pages}>
-              {[
-                'FAQ',
-                'Terms & Conditions',
-                'Privacy Policy',
-                'Contact Us',
-              ].map((link, idx) => (
-                <Typography key={idx} className={s.link}>
-                  {link}
-                </Typography>
+            <div className={s.social}>
+              {socials.map((Social, idx) => (
+                <IconButton key={idx}>
+                  <Social />
+                </IconButton>
               ))}
             </div>
           </div>
 
-          <div className={s.top_right}>
-            <Typography gutterBottom>
-              Ready to become a talent on Divo?
-            </Typography>
-            <Button size="large" variant="outlined">
-              Enroll as a talent
-            </Button>
+          <div className={s.address}>
+            <Typography variant="body1">Znuns group</Typography>
+            <Typography variant="body1">Vukasoviceva 1,</Typography>
+            <Typography variant="body1">10000 zafgre,</Typography>
+            <Typography variant="body1">dubia</Typography>
+
+            <Typography variant="body1">+971-02990-02010</Typography>
           </div>
         </div>
 
         <Divider className={s.divider} />
 
         <div className={s.bottom}>
-          <div className={s.address}>
-            <div className={s.us}>
-              <Typography variant="h5">Divo</Typography>
-            </div>
+          <Typography color="gray">
+            <Link href="/">Privacy Policy</Link> |{' '}
+            <Link href="/">Terms & Conditions</Link>
+          </Typography>
 
-            <Typography variant="body2" color="gray">
-              copyright &copy;
-              {new Date().getFullYear()} Divo
-            </Typography>
-          </div>
-
-          <div className={s.social}></div>
+          <Typography color="gray">© 2021 Znuns Group</Typography>
         </div>
       </div>
     </div>

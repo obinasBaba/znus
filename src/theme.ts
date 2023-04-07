@@ -12,10 +12,10 @@ const theme = createTheme({
       sm: 576,
       md: 768,
       lg: 992,
-      xl: 1200, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      xxl: 1900,
-    },
+      xl: 1200,
+      xxl: 1600,
+      xxxl: 1900,
+    } as any,
   },
 
   components: {
@@ -23,7 +23,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'capitalize',
-          borderRadius: '5000px',
+          borderRadius: '0px',
+          borderWidth: '2px',
+          borderColor: 'black',
           // lineHeight: '100%'
         },
       },
@@ -38,7 +40,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#22A94A',
+      main: '#000',
     },
     secondary: {
       main: '#8d8d8d',

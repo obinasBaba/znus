@@ -35,7 +35,7 @@
     "@prisma/client": "4.11.0",
     "clsx": "1.2.1",
     "color2k": "2.0.0",
-    "framer-motion": "10.8.5",
+    "framer-motion": "^10.10.0",
     "gsap": "3.11.5",
     "lodash.debounce": "4.0.8",
     "lottie-web": "5.10.2",
@@ -43,7 +43,11 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "swiper": "9.0.4"
+    "swiper": "9.0.4",
+    "locomotive-scroll": "^4.1.4",
+    "mouse-follower": "^1.1.2",
+    "use-resize-observer": "^9.0.2",
+    "use-debounce": "^8.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",

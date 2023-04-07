@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import s from './layout.module.scss';
 import FixedLayer from '@/components/commons/FixedLayer';
-import { motion } from 'framer-motion';
 import Footer from '@/components/commons/Footer';
+import { useRouter } from 'next/router';
+import { LocomotiveScrollProvider } from '@/components/commons/layout/LocoMotive';
+import LocomotiveScroll from 'locomotive-scroll';
+import clsx from 'clsx';
 
 interface Props {
   children: React.ReactNode;
@@ -10,15 +13,39 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
-  return (
-    <>
-      <FixedLayer />
+  const container = useRef<HTMLDivElement | null>(null);
+  const { asPath, pathname } = useRouter();
 
-      <motion.div className={s.root}>
-        <main>{children}</main>
+  return (
+    <LocomotiveScrollProvider
+      options={{
+        smooth: true,
+        getDirection: true,
+        getSpeed: true /*smoothMobile: {
+          breakpoint: 0,
+          smooth: true,
+          getDirection: true,
+        },*/ /*tablet: {
+          breakpoint: 0,
+          smooth: true,
+          getDirection: true,
+        },*/,
+      }}
+      containerRef={container} // height change detection
+      watch={[]}
+      onLocationChange={useCallback((scroll: LocomotiveScroll) => null, [])}
+      location={asPath}
+    >
+      <FixedLayer />
+      <div className={s.root} ref={container} data-scroll-container={true}>
+        <main className={clsx([s.main])} id="main-container">
+          <div className="content_wrapper">
+            <div className="main_content_wrapper">{children}</div>
+          </div>
+        </main>
         <Footer />
-      </motion.div>
-    </>
+      </div>
+    </LocomotiveScrollProvider>
   );
 };
 

@@ -53,7 +53,7 @@ export default function MyApp({
       <CacheProvider value={emotionCache}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
-          <title>Rahove . Portfolio</title>
+          <title>Zuns</title>
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />

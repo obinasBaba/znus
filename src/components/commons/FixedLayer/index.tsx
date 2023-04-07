@@ -1,27 +1,18 @@
 import React from 'react';
 import s from './fixed.module.scss';
-
-import { Typography } from '@mui/material';
-import Link from 'next/link';
+import { TopAppBar } from '@/components/commons/FixedLayer/TopAppBar';
+import { AnimatePresence } from 'framer-motion';
+import NavMenu from '@/components/commons/FixedLayer/NavMenu';
+import { useAppContext } from '@/context/app';
 
 const FixedLayer = () => {
-  const links = ['About', 'FAQs', 'Contact Us'];
+  const { navMenu } = useAppContext();
 
   return (
     <div className={s.container}>
-      <nav className={s.nav_top}>
-        <Typography noWrap className={s.meet} variant="subtitle2">
-          MEET D EXPERTS
-        </Typography>
+      <TopAppBar />
 
-        <div className={s.links}>
-          {links.map((link) => (
-            <Link href="/" key={link}>
-              {link}
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <AnimatePresence mode="wait">{navMenu && <NavMenu />}</AnimatePresence>
     </div>
   );
 };

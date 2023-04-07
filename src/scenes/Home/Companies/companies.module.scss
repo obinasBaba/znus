@@ -1,0 +1,117 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: 10vmax;
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local {
+
+    .wrapper {
+
+
+      header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+
+
+        .icon {
+          background-color: #f96a4b;
+          padding: 1.2rem;
+          border-radius: 50%;
+          aspect-ratio: 1/1;
+          display: grid;
+          place-items: center;
+
+          img {
+            object-fit: cover;
+            max-width: 3.2rem;
+            aspect-ratio: 1/1;
+            //max-width: 5rem;
+          }
+        }
+
+        .title_txt {
+
+          .title_txt_sub {
+            display: flex;
+            gap: .5rem;
+            letter-spacing: .2vmax;
+            text-transform: uppercase;
+
+            span {
+              color: #FF8944;
+            }
+          }
+        }
+      }
+
+
+      .main {
+        margin-top: 5rem;
+
+        & > :first-child{
+          .right{
+            background-color: #1AA74B;
+          }
+        }
+
+        & > :nth-child(2){
+          .right{
+            background-color: #8D39F8;
+          }
+        }
+
+        & > :last-child{
+          .right{
+            background-color: #F84F39;
+          }
+        }
+
+        .section {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          //border: 1px solid red;
+          width: 100%;
+          height: 90vh;
+
+          & > *{
+            flex: 1;
+            display: grid;
+            place-items: center;
+          }
+
+          .left{
+            //border: 1px solid red;
+
+            .comp_img{
+              img{
+                object-fit: cover;
+                max-width: 15rem;
+              }
+            }
+          }
+
+          .right{
+            display: grid;
+            place-items: center;
+            flex: 1.2;
+            //border: 1px solid red;
+            height: 100%;
+            //background-color: lighten(s.$clrs-accent, 26%);
+
+
+            .comp_txt{
+              max-width: 50ch;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

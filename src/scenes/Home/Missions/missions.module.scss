@@ -1,0 +1,67 @@
+@use '@/styles/index.scss' as s;
+
+.container{
+  position: relative;
+  width: 100%;
+  background-color: #393a46;
+  z-index: 1;
+
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local{
+
+    .bg{
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 0;
+      background-attachment: fixed;
+    }
+
+    .wrapper{
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 10rem 0;
+      display: flex;
+      flex-flow: column;
+      gap: 3rem;
+      align-items: flex-start;
+      justify-content: center;
+
+      //border: 1px solid red;
+
+      header{
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-flow: column;
+        color: white;
+        //border: 1px solid red;
+      }
+
+      .missions{
+        display: flex;
+        flex-flow: column;
+        gap: 2.5rem;
+        background-color: black;
+        padding: 5rem;
+        color: white;
+        margin-left: auto;
+
+        p{
+          margin-bottom: 2rem;
+        }
+
+        li{
+          max-width: 60ch;
+          margin-top: 1rem;
+          font-size: 1.2rem;
+        }
+
+      }
+    }
+  }
+}

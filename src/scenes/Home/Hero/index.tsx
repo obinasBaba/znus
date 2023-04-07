@@ -1,58 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './hero.module.scss';
-import { IconButton, Stack, SvgIcon, Typography } from '@mui/material';
-import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
-import DonationCard from '@/components/DonationCard';
+
+import HeroImg1 from '@/public/assets/images/hero/hero-image.png';
+import HeroImg2 from '@/public/assets/images/hero/hero-image.png';
+import HeroImg3 from '@/public/assets/images/hero/hero-image.png';
+import { AnimatePresence, motion } from 'framer-motion';
+import { wrap } from '@/util/helpers';
+import { IconButton, Typography } from '@mui/material';
+import { ChevronLeftSharp, ChevronRightSharp } from '@mui/icons-material';
+import Image from 'next/image';
+
+const heroImages = [HeroImg1, HeroImg2, HeroImg3];
+
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    };
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+    };
+  },
+};
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
 
 const Hero = () => {
+  const [[page, direction], setPage] = useState([0, 0]);
+  const [images, setImages] = useState(heroImages);
+  const imageIndex = wrap(0, images.length, page);
+
+  const paginate = (newDirection: number) => {
+    setPage([page + newDirection, newDirection]);
+  };
+
   return (
     <div className={s.container}>
       <div className={s.wrapper}>
-        <Stack className={s.text} spacing={4}>
-          <Stack spacing={2}>
-            <Typography variant="h2">
-              Families in need <br />
-              And Suffering
-            </Typography>
+        <Typography variant="h2" className={s.text}>
+          Let’s Collaborate and <br /> <i>Grow</i> Your Business
+        </Typography>
 
-            <Typography variant="body1" maxWidth="45ch">
-              Families struggle to survive in Ethiopia without enough food,
-              water, and shelter. Support us in providing assistance and
-              emergency help to families in need.
-            </Typography>
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            className={s.content}
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: 'spring', stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-            <Typography variant="body1" maxWidth="35ch" fontSize="1.67rem">
-              Make a one-time or monthly donation to receive this blessing as a
-              member
-            </Typography>
-          </Stack>
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+          >
+            <Image src={images[imageIndex]} alt="hero image" />
+          </motion.div>
+        </AnimatePresence>
+        <div className={s.btns}>
+          <IconButton className={s.next} onClick={() => paginate(1)}>
+            <ChevronLeftSharp fontSize="large" />
+          </IconButton>
 
-          <Stack direction="row">
-            <IconButton>
-              <SvgIcon fontSize="large">
-                <Instagram />
-              </SvgIcon>
-            </IconButton>
-            <IconButton>
-              <SvgIcon fontSize="large">
-                <LinkedIn />
-              </SvgIcon>
-            </IconButton>
-            <IconButton>
-              <SvgIcon fontSize="large">
-                <Facebook />
-              </SvgIcon>
-            </IconButton>
-            <IconButton>
-              <SvgIcon fontSize="large">
-                <Twitter />
-              </SvgIcon>
-            </IconButton>
-          </Stack>
-        </Stack>
-
-        <div className={s.form}>
-          <DonationCard />
+          <IconButton className={s.prev} onClick={() => paginate(-1)}>
+            <ChevronRightSharp fontSize="large" />
+          </IconButton>
         </div>
       </div>
     </div>
@@ -60,3 +98,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+// companies
