@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
 //#ededed
@@ -25,8 +25,7 @@ const theme = createTheme({
           textTransform: 'capitalize',
           borderRadius: '0px',
           borderWidth: '2px',
-          borderColor: 'black',
-          // lineHeight: '100%'
+          borderColor: 'black', // lineHeight: '100%'
         },
       },
     },

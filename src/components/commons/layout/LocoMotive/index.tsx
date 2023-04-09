@@ -21,10 +21,12 @@ import {
   useVelocity,
 } from 'framer-motion';
 import MouseFollower from 'mouse-follower';
-import gsap from 'gsap';
 import RouteChangeEvent from '@/util/helpers/RouteChangeEvent';
-// import ScrollTrigger from 'gsap/ScrollTrigger';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export interface LocomotiveScrollContextValue {
   scroll: Scroll | null;
@@ -99,20 +101,21 @@ export function LocomotiveScrollProvider({
   }, []);
 
   useLayoutEffect(() => {
-    if (LocomotiveScrollRef.current?.el) {
+    if (LocomotiveScrollRef.current) {
       // console.log('IT IS NOT NULL', LocomotiveScrollRef.current.name);
       return;
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
+    console.log('creating locomotive scroll---------------');
+
     import('locomotive-scroll').then((LocomotiveScroll) => {
-      const dataScrollContainer = document.querySelector(
+      const dataScrollContainer: HTMLElement = document.querySelector(
         '[data-scroll-container]',
-      );
+      ) as any;
 
       if (LocomotiveScrollRef.current?.el) {
-        //  console.log('IT IS NOT NULL', LocomotiveScrollRef.current.name);
         return;
       }
 
@@ -122,6 +125,42 @@ export function LocomotiveScrollProvider({
         ...options,
       });
 
+      console.log('scroll proxyy config ---------', ScrollTrigger.getAll());
+      // configure scroll trigger
+      ScrollTrigger.scrollerProxy(dataScrollContainer, {
+        pinType: dataScrollContainer?.style?.transform ? 'transform' : 'fixed',
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+        scrollTop(value) {
+          if (!LocomotiveScrollRef.current) return;
+
+          const top = arguments.length
+            ? LocomotiveScrollRef.current.scrollTo(value as number, {})
+            : LocomotiveScrollRef.current.scroll.instance.scroll.y;
+          // console.log('scrollTop', top);
+
+          return top;
+        },
+      });
+
+      const lsUpdate = () => {
+        if (LocomotiveScrollRef.current) {
+          LocomotiveScrollRef.current.update();
+        }
+      };
+
+      ScrollTrigger.addEventListener('refresh', lsUpdate);
+      ScrollTrigger.update();
+
+      lsUpdate();
+      window.addEventListener('resize', lsUpdate);
+
       setIsReady(true);
 
       // console.log('locomotive starting here -----', LocomotiveScrollRef.current.name);
@@ -129,58 +168,17 @@ export function LocomotiveScrollProvider({
 
     return () => {
       LocomotiveScrollRef.current?.destroy();
-      // console.log('locomotive DYING here -----', LocomotiveScrollRef.current?.name);
+      console.log(
+        'locomotive DYING here -----',
+        LocomotiveScrollRef.current?.name,
+      );
       LocomotiveScrollRef.current = null;
+
+      // ScrollTrigger.killAll();
 
       setIsReady(false);
     };
   }, []);
-
-  // configure scroll trigger
-  useLayoutEffect(() => {
-    if (!LocomotiveScrollRef.current) {
-      return;
-    }
-
-    const dataScrollContainer = document.querySelector(
-      '[data-scroll-container]',
-    );
-
-    /* ScrollTrigger.scrollerProxy(dataScrollContainer, {
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-
-      // pinType: "transform",
-      scrollTop(value) {
-        if (!LocomotiveScrollRef.current) return;
-
-        const top = arguments.length
-          ? LocomotiveScrollRef.current.scrollTo(value as number, {})
-          : LocomotiveScrollRef.current.scroll.instance.scroll.y;
-        // console.log("scrollTop", top, value);
-
-        return top;
-      }, // fixedMarkers: true
-    });*/
-
-    const lsUpdate = () => {
-      if (LocomotiveScrollRef.current) {
-        LocomotiveScrollRef.current.update();
-      }
-    };
-
-    lsUpdate();
-    window.addEventListener('resize', lsUpdate);
-    /* ScrollTrigger.addEventListener('refresh', lsUpdate);
-     ScrollTrigger.refresh();
-     ScrollTrigger.update();*/
-  }, [isReady]);
 
   useEffect(() => {
     if (!LocomotiveScrollRef.current) {
@@ -213,14 +211,16 @@ export function LocomotiveScrollProvider({
   }, [location, onLocationChange]);
 
   useEffect(() => {
-    if (isReady && LocomotiveScrollRef.current) {
-      LocomotiveScrollRef.current.on('scroll', (arg: any) => {
-        // console.log('scrolled: ', arg);
-        x.set(arg?.delta?.x || arg.scroll.x);
-        y.set(arg?.delta?.y || arg.scroll.y);
-        scrollDirection.set(arg.direction);
-      });
-    }
+    setTimeout(() => {
+      if (isReady && LocomotiveScrollRef.current) {
+        LocomotiveScrollRef.current.on('scroll', (arg: any) => {
+          ScrollTrigger.update();
+          x.set(arg?.delta?.x || arg.scroll.x);
+          y.set(arg?.delta?.y || arg.scroll.y);
+          scrollDirection.set(arg.direction);
+        });
+      }
+    });
   }, [isReady]);
 
   return (

@@ -36,7 +36,7 @@
     "clsx": "1.2.1",
     "color2k": "2.0.0",
     "framer-motion": "^10.10.0",
-    "gsap": "3.11.5",
+    "gsap": "^3.11.5",
     "lodash.debounce": "4.0.8",
     "lottie-web": "5.10.2",
     "moment": "2.29.4",

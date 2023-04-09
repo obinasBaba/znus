@@ -1,0 +1,83 @@
+@use '@/styles/index.scss' as s;
+
+.container{
+  width: 100%;
+  margin-top: 10vmax;
+
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local{
+
+    .wrapper{
+      max-width: 90rem;
+      margin: 0 auto;
+      //border: 1px solid red;
+
+      header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title_txt_sub {
+          display: flex;
+          gap: .5rem;
+          letter-spacing: .2vmax;
+          text-transform: uppercase;
+
+          span {
+            color: #FF8944;
+          }
+        }
+
+        h1{
+          position: relative;
+          width: max-content;
+
+          &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: block;
+            background-color: black;
+            border-radius: 5000px;
+            height: 5px;
+            width: 30%;
+
+          }
+        }
+      }
+
+      .products{
+        display: flex;
+        flex-flow: wrap;
+        gap: 1rem;
+        margin-top: 5rem;
+
+        @include s.media-breakpoint-up(xl){
+          flex-flow: nowrap;
+        }
+
+        .product{
+          position: relative;
+          overflow: hidden;
+
+          // on hover scale the image with transition
+          &:hover{
+            img{
+              transform: scale(1.1);
+              transition: transform 1.5s cubic-bezier(0.6, 0.01, 0, 0.9);
+            }
+          }
+
+
+          img{
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.6, 0.01, 0, 0.9);
+          }
+        }
+      }
+    }
+  }
+}
