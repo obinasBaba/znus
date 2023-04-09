@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import s from './companies.module.scss';
 import StackIcon from '@/public/assets/icons/stack.svg';
 import Image from 'next/image';
@@ -42,9 +42,6 @@ const companiesData = [
 ];
 
 const Companies = () => {
-
-  useEffect(() => {}, [])
-
   return (
     <div className={s.container}>
       <Container maxWidth={'xxl' as any} className={s.wrapper}>

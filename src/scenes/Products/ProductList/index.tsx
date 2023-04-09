@@ -13,11 +13,16 @@ import P6 from '@/public/assets/images/products/p6.png';
 import P7 from '@/public/assets/images/products/p7.png';
 import P8 from '@/public/assets/images/products/p8.png';
 import clsx from 'clsx';
+import { useLocomotiveScroll } from '@/components/commons/layout/LocoMotive';
 
 const products = [P1, P2, P3, P4, P5, P6, P7, P8];
 
+const StId = 'product-list-st';
+
 const ProductList = () => {
   const render = useRef(0);
+  const { isStReady } = useLocomotiveScroll();
+  // const isStReady = false;
 
   useEffect(() => {
     const pContainer: HTMLElement = document.querySelector('.p_list') as any;
@@ -29,8 +34,9 @@ const ProductList = () => {
       console.log('creating pin run --------');
 
       ST.killAll();
-      gsap?.to(text, {
+      gsap.to(text, {
         scrollTrigger: {
+          id: StId,
           trigger: text,
           pin: true, // scrub: true,
           pinSpacing: false,
@@ -41,23 +47,35 @@ const ProductList = () => {
           markers: true, // end: () => pContainer?.offsetHeight  || '+=600',
         },
       });
+
+      ST.update();
     };
 
-    // this is because the scroll trigger is not initialized yet.
-    // This enables us to wait for the scroll trigger to be initialized before we can use it.
-    console.log(`useEffect run  -------- ${++render.current}`);
+    if (isStReady) {
+      cb();
+    }
 
-    ST.addEventListener('refreshInit', cb);
+    console.log(
+      `useEffect run  ${++render.current}`,
+      ' isStReady: ',
+      isStReady,
+      'st instances: ',
+      ST.getAll().forEach((st) => console.log(st)),
+    );
+
+    // ST.addEventListener('refreshInit', cb);
 
     return () => {
-      ST.removeEventListener('refreshInit', cb);
+      // ST.removeEventListener('refreshInit', cb);
+      ST.getById(StId)?.kill();
+      console.log('cleaning ST', ST.getAll());
     };
-  }, []);
+  }, [isStReady]);
 
   return (
     <div className={clsx([s.container, 'p-list-container'])}>
       <Container maxWidth={'xxl' as any} className={s.wrapper}>
-        <header className={clsx([s.header, 'text'])}>
+        <aside className={clsx([s.aside, 'text'])}>
           <Typography className={s.title_txt_sub} variant="body1">
             <span>{'//'}</span>
             Who are
@@ -71,7 +89,7 @@ const ProductList = () => {
           <Button size="large" variant="outlined">
             Contact Us
           </Button>
-        </header>
+        </aside>
 
         <div className={clsx([s.p_list, 'p_list'])}>
           {products.map((product) => (

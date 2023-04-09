@@ -1,4 +1,4 @@
-import { Button, IconButton, Slide } from '@mui/material';
+import { IconButton, Slide } from '@mui/material';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import s from './topappbar.module.scss';
 import { useAppContext } from '@/context/app';
@@ -9,7 +9,7 @@ import RouteChangeEvent from '@/util/helpers/RouteChangeEvent';
 import debounce from 'lodash.debounce';
 import { NotesTwoTone } from '@mui/icons-material';
 import LogoSvg from '@/components/Logo';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface Props {
   window?: () => Window;
@@ -76,7 +76,9 @@ export function TopAppBar() {
       <nav className={s.container}>
         <div className={s.wrapper}>
           <div className={s.logo}>
-            <LogoSvg fill="#000" />
+            <Link href="/">
+              <LogoSvg fill="#000" />
+            </Link>
           </div>
 
           <IconButton onClick={() => openNavMenu()} color="inherit">

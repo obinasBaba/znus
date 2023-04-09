@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './todaycard.module.scss';
-import {Button, Chip, Typography} from '@mui/material';
+import { Button, Chip, Typography } from '@mui/material';
 import Image from 'next/image';
 import P1 from './Sessions-Sessions-ppl1.png';
 import P2 from './Sessions-Sessions-ppl2.png';
@@ -14,7 +14,6 @@ const people = [P1, P2, P3, P4];
 const TodayCard = () => {
   return (
     <div className={s.container}>
-
       <div className={s.card}>
         <div className={s.text}>
           <header>
@@ -32,9 +31,7 @@ const TodayCard = () => {
             We exist to help people get answers to questions threy’ve not found.
             Either that they cannot ask them or they do not know to frame them,
             or the answers are not framed well...{' '}
-            <Link href="/">
-              Read more
-            </Link>
+            <Link href="/">Read more</Link>
           </Typography>
 
           <div className={s.people}>
@@ -97,7 +94,6 @@ const TodayCard = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

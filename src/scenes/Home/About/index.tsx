@@ -4,6 +4,7 @@ import s from './about.module.scss';
 import AboutImg from '@/public/assets/images/about-img.png';
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -40,9 +41,11 @@ const About = () => {
             returns and fight against complacency wherever it is evident.
           </Typography>
 
-          <Button variant="outlined" size="large">
-            Learn More
-          </Button>
+          <Link href="/our-companies">
+            <Button variant="outlined" size="large">
+              Learn More
+            </Button>
+          </Link>
         </div>
 
         <div className={s.right}>

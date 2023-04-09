@@ -5,7 +5,7 @@ import P1 from '@/public/assets/images/product-1.png';
 import P2 from '@/public/assets/images/product-2.png';
 import P3 from '@/public/assets/images/product-3.png';
 import Image from 'next/image';
-import Link from "next/link";
+import Link from 'next/link';
 
 const products = [P1, P2, P3];
 
@@ -28,7 +28,7 @@ const Products = () => {
 
         <div className={s.products}>
           {products.map((product) => (
-            <Link href='/products'>
+            <Link href="/products" key={product.src}>
               <div className={s.product} key={product.src}>
                 <Image src={product} alt="znus product" />
               </div>

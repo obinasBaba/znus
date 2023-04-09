@@ -1,0 +1,49 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  position: relative;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+
+  //border: 1px solid red;
+
+  & :local {
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: -1;
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      filter: blur(3px);
+      max-height: 35vmax;
+
+      @include s.media-breakpoint-up(lg){
+        max-height: 20vmax;
+      }
+
+    }
+
+    .wrapper {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      align-self: end;
+      margin-bottom: 4vmax;
+
+      //border: 1px solid blue;;
+
+      .text {
+        color: white;
+
+        h5 {
+          //font-size: 1.3rem;
+          font-weight: 400 !important;
+        }
+      }
+    }
+  }
+}

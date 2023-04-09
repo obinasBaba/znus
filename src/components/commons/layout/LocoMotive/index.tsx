@@ -25,12 +25,14 @@ import RouteChangeEvent from '@/util/helpers/RouteChangeEvent';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import { Router } from 'next/router';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export interface LocomotiveScrollContextValue {
   scroll: Scroll | null;
   isReady: boolean;
+  isStReady: boolean;
   scale: MotionValue<number>;
   scrollDirection: MotionValue<string>;
   yProgress: MotionValue<number>;
@@ -42,6 +44,7 @@ export interface LocomotiveScrollContextValue {
 const LocomotiveScrollContext = createContext<LocomotiveScrollContextValue>({
   scroll: null,
   isReady: false,
+  isStReady: false,
   scale: new MotionValue<number>(),
 } as any);
 
@@ -69,6 +72,7 @@ export function LocomotiveScrollProvider({
     ref: containerRef,
   });
   const [isReady, setIsReady] = useState(false);
+  const [isStReady, setStReady] = useState(false);
   const LocomotiveScrollRef = useRef<Scroll | null>(null);
   const [height] = useDebounce(containerHeight, 100);
   const cursor = useRef<MouseFollower>();
@@ -92,6 +96,8 @@ export function LocomotiveScrollProvider({
 
   useLayoutEffect(() => {
     const event = RouteChangeEvent.GetInstance();
+
+    Router.events.on('routeChangeStart', () => setStReady(false));
 
     event.addListener('end', () => {
       cursor.current?.removeText();
@@ -127,6 +133,9 @@ export function LocomotiveScrollProvider({
 
       console.log('scroll proxyy config ---------', ScrollTrigger.getAll());
       // configure scroll trigger
+      ScrollTrigger.addEventListener('refreshInit', () => {
+        setStReady(true);
+      });
       ScrollTrigger.scrollerProxy(dataScrollContainer, {
         pinType: dataScrollContainer?.style?.transform ? 'transform' : 'fixed',
         getBoundingClientRect() {
@@ -199,7 +208,11 @@ export function LocomotiveScrollProvider({
       return;
     }
 
-    // console.log('location change ---- -- - - - -');
+    console.log('location change ---- -- - - - -');
+
+    ScrollTrigger.killAll();
+    ScrollTrigger.update();
+    setStReady(true);
 
     LocomotiveScrollRef.current.update();
     // cursor.current?.removeText();
@@ -229,6 +242,7 @@ export function LocomotiveScrollProvider({
         cursor,
         scroll: LocomotiveScrollRef.current,
         isReady,
+        isStReady,
         scale,
         scrollDirection,
         yProgress,

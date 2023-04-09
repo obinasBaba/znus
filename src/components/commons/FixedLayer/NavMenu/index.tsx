@@ -139,7 +139,6 @@ const NavMenu = () => {
             </motion.div>
           ))}
         </motion.div>
-
       </MotionChild>
     </MotionParent>
   );
