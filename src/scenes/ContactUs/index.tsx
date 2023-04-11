@@ -51,7 +51,9 @@ const ContactUs = () => {
                     <social.Icon />
                     <Stack direction="column">
                       <Typography variant="h5">{social.name}</Typography>
-                      <Typography variant="body1" className={s.social_desc}>{social.content}</Typography>
+                      <Typography variant="body1" className={s.social_desc}>
+                        {social.content}
+                      </Typography>
                     </Stack>
                   </Stack>
                 </div>

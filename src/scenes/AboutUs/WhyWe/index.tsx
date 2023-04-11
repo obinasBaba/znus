@@ -29,7 +29,6 @@ const Intro = () => {
   return (
     <div className={s.container}>
       <Container maxWidth={'xxl' as any} className={s.wrapper}>
-
         <div>
           <Typography className={s.title_txt_sub} variant="body1">
             <span>{'//'}</span>
@@ -55,7 +54,6 @@ const Intro = () => {
             </div>
           ))}
         </div>
-
       </Container>
     </div>
   );
