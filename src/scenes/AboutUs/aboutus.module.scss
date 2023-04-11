@@ -1,0 +1,16 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local {
+
+    .wrapper {
+
+    }
+  }
+}

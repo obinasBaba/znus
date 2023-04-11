@@ -1,4 +1,4 @@
-import { IconButton, Slide } from '@mui/material';
+import { IconButton, Slide, Stack, Typography } from '@mui/material';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import s from './topappbar.module.scss';
 import { useAppContext } from '@/context/app';
@@ -81,9 +81,22 @@ export function TopAppBar() {
             </Link>
           </div>
 
-          <IconButton onClick={() => openNavMenu()} color="inherit">
-            <NotesTwoTone />
-          </IconButton>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            onClick={() => openNavMenu()}
+            sx={{
+              border: 'thin solid black',
+              padding: '.22rem .5rem .22rem .8rem',
+              cursor: 'pointer',
+            }}
+          >
+            <Typography>MENU</Typography>
+            <IconButton color="inherit">
+              <NotesTwoTone />
+            </IconButton>
+          </Stack>
         </div>
       </nav>
     </HideOnScroll>

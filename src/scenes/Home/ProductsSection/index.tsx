@@ -16,6 +16,7 @@ const Products = () => {
         <header>
           <div>
             <Typography className={s.title_txt_sub} variant="body1">
+              <span>{'//'}</span>
               Zuns Group
             </Typography>
             <Typography variant="h1">Products</Typography>

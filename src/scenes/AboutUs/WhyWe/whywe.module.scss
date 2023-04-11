@@ -1,0 +1,76 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  position: relative;
+  width: 100%;
+
+
+  padding: 5rem 0;
+
+  //border: 1px solid red;
+  margin-top: 6vmax;
+
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local {
+
+
+    .wrapper {
+      display: flex;
+      flex-flow: column;
+      gap: 2rem;
+
+      .title_txt_sub {
+        display: flex;
+        gap: .5rem;
+        letter-spacing: .2vmax;
+        text-transform: uppercase;
+        margin-top: 8vmax;
+
+
+        span {
+          color: s.$clrs-accent;
+        }
+      }
+
+      //border: 1px solid #000;
+      .why_list{
+        display: flex;
+        //align-items: center;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .why_we_card {
+        display: flex;
+        flex-flow: column;
+        gap: 1rem;
+        padding: 3rem;
+        background-color: #F5F9FF;
+        border: 1px solid #bed8ff;
+
+        .desc{
+          color: lightslategray;
+        }
+
+
+        & > :first-child {
+          height: 6rem;
+          width: 6rem;
+          align-self: flex-start;
+          border-radius: 50%;
+          background-color: #bed8ff;
+          display: grid;
+          place-items: center;
+          padding: 1rem;
+          & > *{
+            //line-height: 90%;
+          }
+        }
+      }
+
+
+    }
+  }
+}

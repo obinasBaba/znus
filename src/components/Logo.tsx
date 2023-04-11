@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Logo = ({ fill = 'white' }) => {
+const Logo = ({ fill = '#ffffff' }) => {
   return (
     <svg
       width="139"

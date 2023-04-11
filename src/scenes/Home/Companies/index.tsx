@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import s from './companies.module.scss';
 import StackIcon from '@/public/assets/icons/stack.svg';
 import Image from 'next/image';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Comp1 from '@/public/assets/images/Shire.png';
 import Comp2 from '@/public/assets/images/Trade.png';
 import Comp3 from '@/public/assets/images/Zuns.png';
@@ -44,7 +44,7 @@ const companiesData = [
 const Companies = () => {
   return (
     <div className={s.container}>
-      <Container maxWidth={'xxl' as any} className={s.wrapper}>
+      <div className={s.wrapper}>
         <header>
           <div className={s.icon}>
             <Image src={StackIcon} alt="companies icon" />
@@ -77,11 +77,18 @@ const Companies = () => {
                   <Typography variant="h5"> {title} </Typography>
                   <Typography> {text} </Typography>
                 </div>
+
+                <div className={s.comp_address}>
+                  <Typography variant="h5"> ADDRESS </Typography>
+                  <Typography>++251911213001</Typography>
+                  <Typography> Location of the office </Typography>
+                  <Typography>Email@Company.com</Typography>
+                </div>
               </div>
             </section>
           ))}
         </main>
-      </Container>
+      </div>
     </div>
   );
 };

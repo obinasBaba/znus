@@ -1,0 +1,126 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  position: relative;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background-color: #F5F9FF;
+
+
+  padding: 5rem 0;
+
+  //border: 1px solid red;
+  margin-top: 6vmax;
+
+  // @include s.margin(top, 10rem);
+  // @include s.padding(bottom, 8rem);
+
+  & :local {
+
+    .bg{
+      position: absolute;
+      height: 70%;
+      width: 60rem;
+      background-color: #F5F9FF;
+      left: 15%;
+      top: 10%;
+      rotate: 30deg;
+      z-index: -1;
+      display: none;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      padding: 1rem;
+      //border: 1px solid #000;
+
+
+      .about{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        padding: 1rem;
+
+        .text{
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+          gap: 2.5rem;
+
+          aside{
+            display: flex;
+            flex-flow: column;
+            gap: .5rem;
+
+            .text_title{
+              letter-spacing: -.1vmax;
+              line-height: 100%;
+            }
+
+            .desc{
+              max-width: 60ch;
+              margin-top: .5rem;
+              font-size: 1.3rem;
+            }
+
+            .title_txt_sub {
+              display: flex;
+              gap: .5rem;
+              letter-spacing: .2vmax;
+              text-transform: uppercase;
+
+              span {
+                color: s.$clrs-accent;
+              }
+            }
+
+
+          }
+
+
+          .our{
+            display: flex;
+            flex-flow: column;
+            gap: 2rem;
+            padding: 4rem 2rem;
+            //border: 1px solid red;
+
+            .our_desc{
+              max-width: 60ch;
+              color: gray;
+            }
+          }
+        }
+
+      }
+
+      .services{
+        margin-top: 6rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 15rem;
+
+        .text_title{
+          letter-spacing: -.1vmax;
+          line-height: 100%;
+
+        }
+
+        .desc{
+          max-width: 45ch;
+          margin-top: .5rem;
+          //font-size: 1.3rem;
+        }
+
+      }
+
+    }
+  }
+}

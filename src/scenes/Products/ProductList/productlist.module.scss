@@ -50,7 +50,7 @@
           text-transform: uppercase;
 
           span {
-            color: #FF8944;
+            color: s.$clrs-accent;
           }
         }
 
@@ -93,6 +93,7 @@
           }
 
           .p_text {
+            display: none;
             position: absolute;
             bottom: 0;
             width: 100%;

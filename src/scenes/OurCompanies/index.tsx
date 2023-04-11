@@ -93,9 +93,10 @@ const OurCompanies = () => {
 
   return (
     <div className={clsx([s.container, 'c-list-container'])}>
-      <Container maxWidth={'xxl' as any} className={s.wrapper}>
-        <Header />
 
+      <Header />
+
+      <Container maxWidth={'xxl' as any} className={s.wrapper}>
         <div className={s.content}>
           <aside className={clsx([s.aside, 'sticky'])}>
             <div className={s.text}>

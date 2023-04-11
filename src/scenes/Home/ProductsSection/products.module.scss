@@ -26,8 +26,15 @@
           text-transform: uppercase;
 
           span {
-            color: #FF8944;
+            color: s.$clrs-accent;
           }
+        }
+
+        button{
+          width: 100%;
+          max-width: 10rem;
+          font-size: 1.2rem;
+
         }
 
         h1{
@@ -52,7 +59,7 @@
       .products{
         display: flex;
         flex-flow: wrap;
-        gap: 1rem;
+        gap: 2.5rem;
         margin-top: 5rem;
 
         @include s.media-breakpoint-up(xl){
