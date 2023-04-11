@@ -93,7 +93,6 @@ const OurCompanies = () => {
 
   return (
     <div className={clsx([s.container, 'c-list-container'])}>
-
       <Header />
 
       <Container maxWidth={'xxl' as any} className={s.wrapper}>
