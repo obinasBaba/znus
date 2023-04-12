@@ -13,7 +13,8 @@ import { Typography } from '@mui/material';
 const CompaniesCards = () => {
   const [isDefault, setIsDefault] = useState(true);
 
-  return (<div className={s.container}>
+  return (
+    <div className={s.container}>
       <div className={s.wrapper}>
         <div className={s.left}>
           <div className={s.c_img}>
@@ -39,13 +40,16 @@ const CompaniesCards = () => {
               setIsDefault(false);
             }}
           >
-            {[Img1, Img2, Img3].map((item, idx) => (<div className={s.img} key={idx}>
+            {[Img1, Img2, Img3].map((item, idx) => (
+              <div className={s.img} key={idx}>
                 <Image src={item} alt="image" />
-              </div>))}
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
-    </div>);
+    </div>
+  );
 };
 
 export default CompaniesCards;

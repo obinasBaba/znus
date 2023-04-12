@@ -46,8 +46,6 @@ const Companies = () => {
     <div className={s.container}>
       <div className={s.wrapper}>
         <header>
-
-
           <div className={s.title_txt}>
             <Typography className={s.title_txt_sub} variant="body1">
               <span>{'//'}</span>
