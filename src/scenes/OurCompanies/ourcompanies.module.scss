@@ -1,15 +1,15 @@
 @use '@/styles/index.scss' as s;
 
-.container{
+.container {
   width: 100%;
   min-height: 100vh;
 
   // @include s.margin(top, 10rem);
   // @include s.padding(bottom, 8rem);
 
-  & :local{
+  & :local {
 
-    .wrapper{
+    .wrapper {
       display: flex;
       flex-flow: column;
       justify-content: space-evenly;
@@ -17,7 +17,7 @@
 
     }
 
-    .content{
+    .content {
       width: 100%;
       display: flex;
       justify-content: space-evenly;
@@ -40,49 +40,53 @@
 
         //border: 1px solid black;
 
-        .title_txt_sub {
-          display: flex;
-          gap: .5rem;
-          letter-spacing: .2vmax;
-          text-transform: uppercase;
-          margin-top: 2vmax;
+        .text {
+          margin: 0 auto;
+          //border: 1px solid yellow;
 
+          .title_txt_sub {
+            display: flex;
+            gap: .5rem;
+            letter-spacing: .2vmax;
+            text-transform: uppercase;
 
-          span {
-            color: s.$clrs-accent;
+            span {
+              color: s.$clrs-accent;
+            }
           }
-        }
 
-        h2 {
-          letter-spacing: -.13vmax;
-          @include s.media-breakpoint-up(xxl) {
-            font-size: 5rem;
+          h2 {
+            letter-spacing: -.13vmax;
+            @include s.media-breakpoint-up(xxl) {
+              font-size: 5rem;
+            }
           }
-        }
 
-        .desc {
-          //max-width: 50ch;
+          .desc {
+            max-width: 40ch;
 
-          @include s.media-breakpoint-up(lg) {
-            max-width: 55ch;
-            //display: none;
+            @include s.media-breakpoint-up(lg) {
+              max-width: 45ch;
+              //display: none;
+            }
           }
+
+          button {
+            font-size: 1.2rem;
+            max-width: 16rem;
+            margin-top: 2rem;
+          }
+
         }
 
-        button {
-          font-size: 1.2rem;
-          max-width: 12rem;
-          margin-top: 2rem;
-        }
-
-        .section_no{
-           writing-mode: vertical-rl;
+        .section_no {
+          writing-mode: vertical-rl;
           transform: rotate(180deg);
           font-weight: 400 !important;
           margin-left: auto;
           align-self: flex-start;
 
-          b{
+          b {
             display: inline-block;
             margin: .2rem 0;
           }
@@ -90,34 +94,34 @@
         }
       }
 
-      .c_list{
+      .c_list {
         display: flex;
         flex-flow: column;
         align-items: center;
-        gap: 10rem;
-        flex: 1;
+        gap: 6rem;
+        flex: .9;
 
         //border: 1px solid black;
 
 
-        .company{
+        .company {
           display: flex;
           flex-flow: column;
           gap: 1rem;
           //border: 1px solid red;
 
-          .c_img{
+          .c_img {
             position: relative;
             max-width: 25vmax;
 
 
-            img{
+            img {
               object-fit: cover;
               display: block;
             }
           }
 
-          .c_text{
+          .c_text {
             max-width: 50ch;
           }
         }

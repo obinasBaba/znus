@@ -6,6 +6,7 @@ import Missions from '@/scenes/Home/Missions';
 import About from '@/scenes/Home/About';
 import Products from '@/scenes/Home/ProductsSection';
 import Video from '@/scenes/Home/Video';
+import CompaniesCards from '@/scenes/Home/CompaniesCards';
 
 const Home = () => {
   return (
@@ -15,6 +16,8 @@ const Home = () => {
       <About />
 
       <Missions />
+
+      <CompaniesCards />
 
       <Companies />
 

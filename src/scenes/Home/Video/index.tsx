@@ -7,6 +7,7 @@ import {
   PauseCircleFilledTwoTone,
   PlayCircleFilledTwoTone,
 } from '@mui/icons-material';
+import { motion } from 'framer-motion';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
@@ -15,7 +16,19 @@ const Video = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className={s.container}>
+    <motion.div
+      className={s.container}
+      viewport={{
+        once: false,
+        amount: 'some',
+      }}
+      onViewportEnter={() => {
+        if (!isLoading) setPlaying(true);
+      }}
+      onViewportLeave={() => {
+        if (!isLoading) setPlaying(false);
+      }}
+    >
       <div className={s.wrapper}>
         <ReactPlayer
           url="https://assets.mixkit.co/videos/preview/mixkit-dubai-city-skyscrapers-and-the-burj-khalifa-20114-large.mp4"
@@ -53,7 +66,7 @@ const Video = () => {
           </IconButton>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

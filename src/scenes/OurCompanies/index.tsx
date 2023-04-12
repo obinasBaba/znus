@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import s from './ourcompanies.module.scss';
 import Header from '@/scenes/OurCompanies/Header';
 import clsx from 'clsx';
@@ -15,33 +15,37 @@ import ST from 'gsap/dist/ScrollTrigger';
 
 const companies = [
   {
-    text: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-              aperiam dolorem eveniet modi, necessitatibus pariatur rem vel
-              velit! Aliquam, suscipit unde voluptas.`,
+    text: `Lorem ipsum dolor sit amet consectetur. Pretium ante tempor nascetur donec.
+     Amet consequat quam in sed sapien in vitae tellus. Quisque erat elementum erat vestibulum
+     lorem vestibulum eget. Porttitor ultrices porttitor vulputate molestie ornare aenean sit rutrum.
+     Integer sit egestas eget tellus ut. Facilisi velit sem ac sed nunc est. Vulputate consectetur`,
     img: Comp1,
     path: '/our-companies',
   },
   {
-    text: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-              aperiam dolorem eveniet modi, necessitatibus pariatur rem vel
-              velit! Aliquam, suscipit unde voluptas.`,
+    text: `Lorem ipsum dolor sit amet consectetur. Pretium ante tempor nascetur donec.
+     Amet consequat quam in sed sapien in vitae tellus. Quisque erat elementum erat vestibulum lorem
+     vestibulum eget. Porttitor ultrices porttitor vulputate molestie ornare aenean sit rutrum.`,
     img: Comp2,
     path: '/our-companies',
   },
   {
-    text: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-              aperiam dolorem eveniet modi, necessitatibus pariatur rem vel
-              velit! Aliquam, suscipit unde voluptas.`,
+    text: `Lorem ipsum dolor sit amet consectetur. Pretium ante tempor nascetur donec.
+    Amet consequat quam in sed sapien in vitae tellus. Quisque erat elementum erat vestibulum lorem vestibulum eget.
+    Porttitor ultrices porttitor vulputate molestie ornare aenean sit rutrum. Integer sit egestas eget tellus ut.
+     Facilisi velit sem ac sed nunc est. Vulputate consectetur eleifend eu suspendisse ultricies at fermentum. `,
     img: Comp3,
     path: '/our-companies',
   },
 ];
 
 const StId = 'company-list-st';
+const StImagesId = 'company-list-st';
 
 const OurCompanies = () => {
   const render = useRef(0);
   const { isStReady } = useLocomotiveScroll();
+  const [activeSection, setActiveSection] = useState(1);
 
   useEffect(() => {
     const cContainer: HTMLElement = document.querySelector('.c_list') as any;
@@ -50,7 +54,7 @@ const OurCompanies = () => {
     );
 
     const cb = () => {
-      console.log('creating pin run --------');
+      // console.log('creating pin run --------');
 
       ST.killAll();
       gsap.to(sticky, {
@@ -65,6 +69,32 @@ const OurCompanies = () => {
 
           markers: process.env.NODE_ENV !== 'production',
         },
+      });
+
+      companies.map((_, idx) => {
+        gsap.to(`.company-image-${idx + 1}`, {
+          scrollTrigger: {
+            id: StImagesId,
+            trigger: `.company-image-${idx + 1}`,
+            scroller: '[data-scroll-container]',
+            start: () => 'top 25%',
+            end: () => cContainer?.offsetHeight,
+            onEnter: ({ progress, direction, isActive }) => {
+              console.log('onEnter : ', idx, progress, direction, isActive);
+              setActiveSection(idx + 1);
+            },
+            onLeaveBack: ({ progress, direction, isActive }) => {
+              console.log('onLeaveBack : ', idx, progress, direction, isActive);
+              if (idx === 0) {
+                setActiveSection(1);
+                return;
+              }
+              setActiveSection(idx + 1 - 1);
+            },
+
+            // markers: process.env.NODE_ENV !== 'production',
+          },
+        });
       });
 
       ST.update();
@@ -103,7 +133,7 @@ const OurCompanies = () => {
                 <span>{'//'}</span>
                 Companies
               </Typography>
-              <Typography variant="h2">Our Companies</Typography>
+              <Typography variant="h3">Our Companies</Typography>
               <Typography variant="body1" className={s.desc}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
                 aperiam dolorem eveniet modi, necessitatibus pariatur rem vel
@@ -112,27 +142,27 @@ const OurCompanies = () => {
 
               <Stack width="100%">
                 <Button size="large" variant="outlined">
-                  Contact Us
+                  ZUNS GOOD
                 </Button>
                 <Button size="large" variant="outlined">
-                  Contact Us
+                  SHIRE SHANGHAI
                 </Button>
                 <Button size="large" variant="outlined">
-                  Contact Us
+                  ZUNS INTERNATIONAL
                 </Button>
               </Stack>
             </div>
 
-            <Typography variant="h5" className={s.section_no}>
-              <b>01</b>
+            <Typography variant="h6" className={s.section_no}>
+              <b>{activeSection}</b>
               <i>/03</i>
             </Typography>
           </aside>
 
           <div className={clsx([s.c_list, 'c_list'])}>
-            {companies.map((company) => (
+            {companies.map((company, idx) => (
               <div className={s.company} key={company.img.src}>
-                <div className={s.c_img}>
+                <div className={clsx([s.c_img, `company-image-${idx + 1}`])}>
                   <Image src={company.img} alt="company image" />
                 </div>
                 <Typography className={s.c_text}>{company.text}</Typography>
