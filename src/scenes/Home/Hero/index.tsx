@@ -9,6 +9,14 @@ import { wrap } from '@/util/helpers';
 import { IconButton, Typography } from '@mui/material';
 import { ChevronLeftSharp, ChevronRightSharp } from '@mui/icons-material';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import clsx from 'clsx';
 
 const heroImages = [HeroImg1, HeroImg2, HeroImg3];
 
@@ -60,35 +68,36 @@ const Hero = () => {
             key={page}
             custom={direction}
             variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
           >
-            <Image src={images[imageIndex]} alt="hero image" />
+            <Swiper
+              loop
+              autoplay
+              speed={1000}
+              slidesPerView={1}
+              modules={[Autoplay, Pagination, Navigation]}
+              className={clsx([s.swiper, 'mySwiper'])}
+              navigation={{
+                enabled: true,
+                nextEl: '.next-btn',
+                prevEl: '.prev-btn',
+              }}
+            >
+              {images.map((image) => (
+                <SwiperSlide key={image.src}>
+                  <div className={s.img}>
+                    <Image src={images[imageIndex]} alt="hero image" />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </motion.div>
         </AnimatePresence>
         <div className={s.btns}>
-          <IconButton className={s.next} onClick={() => paginate(1)}>
+          <IconButton className={clsx([s.next, 'next-btn'])}>
             <ChevronLeftSharp fontSize="large" />
           </IconButton>
 
-          <IconButton className={s.prev} onClick={() => paginate(-1)}>
+          <IconButton className={clsx([s.prev, 'prev-btn'])}>
             <ChevronRightSharp fontSize="large" />
           </IconButton>
         </div>

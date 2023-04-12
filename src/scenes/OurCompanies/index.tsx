@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import s from './ourcompanies.module.scss';
 import Header from '@/scenes/OurCompanies/Header';
 import clsx from 'clsx';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 
 import Comp1 from '@/public/assets/images/companies/comp-1.png';
 import Comp2 from '@/public/assets/images/companies/comp-2.png';
@@ -63,7 +63,7 @@ const OurCompanies = () => {
           start: () => 'top 25%',
           end: () => cContainer?.offsetHeight,
 
-          markers: true, // end: () => pContainer?.offsetHeight  || '+=600',
+          markers: process.env.NODE_ENV !== 'production',
         },
       });
 
@@ -109,9 +109,18 @@ const OurCompanies = () => {
                 aperiam dolorem eveniet modi, necessitatibus pariatur rem vel
                 velit! Aliquam, suscipit unde voluptas.
               </Typography>
-              <Button size="large" variant="outlined">
-                Contact Us
-              </Button>
+
+              <Stack width="100%">
+                <Button size="large" variant="outlined">
+                  Contact Us
+                </Button>
+                <Button size="large" variant="outlined">
+                  Contact Us
+                </Button>
+                <Button size="large" variant="outlined">
+                  Contact Us
+                </Button>
+              </Stack>
             </div>
 
             <Typography variant="h5" className={s.section_no}>

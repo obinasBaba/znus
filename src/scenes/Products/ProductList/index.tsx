@@ -44,7 +44,7 @@ const ProductList = () => {
           start: () => 'top 25%',
           end: () => pContainer?.offsetHeight,
 
-          // markers: true,
+          markers: process.env.NODE_ENV !== 'production',
         },
       });
 

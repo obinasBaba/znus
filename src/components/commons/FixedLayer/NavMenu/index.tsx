@@ -24,30 +24,30 @@ import Image from 'next/image';
 
 const links = [
   { name: 'Home', link: '/' },
-  { name: 'About Us', link: '/' },
+  { name: 'About Us', link: '/about-us' },
   {
     name: 'Our Companies',
-    link: '/',
+    link: '/our-companies',
   },
-  { name: 'Our Products', link: '/' },
-  { name: 'Contact Us', link: '/' },
+  { name: 'Our Products', link: '/products' },
+  { name: 'Contact Us', link: '/contact-us' },
 ];
 
 const menuImgs = [
   {
     img: MenuImg1,
-    link: '/',
-    text: 'lorem5',
+    link: '/our-companies',
+    text: 'Industrial & Trade',
   },
   {
     img: MenuImg2,
-    link: '/',
-    text: 'lorem5',
+    link: '/our-companies',
+    text: 'International Trade',
   },
   {
     img: MenuImg3,
-    link: '/',
-    text: 'lorem5',
+    link: '/our-companies',
+    text: 'Good Wholesaler',
   },
 ];
 
@@ -113,7 +113,7 @@ const NavMenu = () => {
                   <Image src={img} alt="menu image" />
                 </div>
                 <div className={s.img_text} data-cursor="-opaque">
-                  <Typography variant="h4">{text}</Typography>
+                  <Typography variant="h5">{text}</Typography>
                 </div>
               </Link>
             </motion.div>

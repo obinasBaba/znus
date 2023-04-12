@@ -3,12 +3,10 @@
 .container {
   position: relative;
   width: 100%;
-
-
   padding: 5rem 0;
 
   //border: 1px solid red;
-  margin-top: 6vmax;
+  //margin-top: 6vmax;
 
   // @include s.margin(top, 10rem);
   // @include s.padding(bottom, 8rem);
@@ -19,14 +17,15 @@
     .wrapper {
       display: flex;
       flex-flow: column;
-      gap: 2rem;
+        gap: 2rem;
+      max-width: 93rem;
 
       .title_txt_sub {
         display: flex;
         gap: .5rem;
         letter-spacing: .2vmax;
         text-transform: uppercase;
-        margin-top: 8vmax;
+        //margin-top: 3vmax;
 
 
         span {

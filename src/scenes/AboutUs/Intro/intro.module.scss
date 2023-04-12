@@ -1,10 +1,10 @@
 @use '@/styles/index.scss' as s;
 
 .container {
-  position: relative;
+  //position: relative;
   width: 100%;
   backdrop-filter: blur(10px);
-  background-color: #F5F9FF;
+  //background-color: #F5F9FF;
 
 
   padding: 5rem 0;
@@ -19,23 +19,24 @@
 
     .bg{
       position: absolute;
-      height: 70%;
-      width: 60rem;
+      inset: 0;
       background-color: #F5F9FF;
-      left: 15%;
-      top: 10%;
-      rotate: 30deg;
+      //left: 15%;
+      //top: 10%;
+      //rotate: 30deg;
       z-index: -1;
-      display: none;
+      //display: none;
     }
 
     .wrapper {
+      position: relative;
       display: flex;
       flex-flow: column;
       align-items: center;
       justify-content: center;
       gap: 5rem;
-      padding: 1rem;
+      width: 100%;
+      padding: 5rem 1rem;
       //border: 1px solid #000;
 
 
@@ -45,6 +46,8 @@
         justify-content: center;
         gap: 5rem;
         padding: 1rem;
+
+        //border: 1px solid red;
 
         .text{
           display: flex;
@@ -100,27 +103,30 @@
 
       }
 
-      .services{
-        margin-top: 6rem;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 15rem;
+    }
 
-        .text_title{
-          letter-spacing: -.1vmax;
-          line-height: 100%;
+    .services{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15rem;
+      margin: 8rem auto 0;
+      //border: 1px solid red;
+      max-width: 90rem;
 
-        }
-
-        .desc{
-          max-width: 45ch;
-          margin-top: .5rem;
-          //font-size: 1.3rem;
-        }
+      .text_title{
+        letter-spacing: -.1vmax;
+        line-height: 100%;
 
       }
 
+      .desc{
+        max-width: 45ch;
+        margin-top: .5rem;
+        //font-size: 1.3rem;
+      }
+
     }
+
   }
 }

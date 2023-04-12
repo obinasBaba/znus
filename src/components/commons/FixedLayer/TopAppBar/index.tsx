@@ -5,7 +5,6 @@ import { useAppContext } from '@/context/app';
 import { useRouter } from 'next/router';
 import { useLocomotiveScroll } from '@/components/commons/layout/LocoMotive';
 import { useAppInfo } from '@/context/MotionValuesContext';
-import RouteChangeEvent from '@/util/helpers/RouteChangeEvent';
 import debounce from 'lodash.debounce';
 import { NotesTwoTone } from '@mui/icons-material';
 import LogoSvg from '@/components/Logo';
@@ -27,11 +26,14 @@ function HideOnScroll(props: Props) {
   const { appBarScrollState } = useAppInfo();
 
   useLayoutEffect(() => {
-    const event = RouteChangeEvent.GetInstance();
-
-    event.addListener('end', () => {
+    const showNavBar = () => {
       setTrigger(true);
-    });
+    };
+    router.events.on('routeChangeComplete', showNavBar);
+
+    return () => {
+      router.events.off('routeChangeComplete', showNavBar);
+    };
   }, []);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ function HideOnScroll(props: Props) {
         setTrigger(false);
         appBarScrollState.set('down');
       }
-    }, 400);
+    }, 300);
 
     // scrollDirection.onChange(debouncedResponse);
     scrollDirection.on('change', debouncedResponse);
@@ -70,6 +72,20 @@ function HideOnScroll(props: Props) {
 
 export function TopAppBar() {
   const { openNavMenu } = useAppContext();
+  const [scrolled, setScrolled] = useState(false);
+  const { y } = useLocomotiveScroll();
+
+  useEffect(() => {
+    const debouncedResponse = debounce((yAmount) => {
+      if (yAmount > 400) {
+        setScrolled(true);
+      } else setScrolled(false);
+    }, 300);
+
+    y.on('change', debouncedResponse);
+
+    return () => y.clearListeners();
+  });
 
   return (
     <HideOnScroll>
@@ -77,7 +93,7 @@ export function TopAppBar() {
         <div className={s.wrapper}>
           <div className={s.logo}>
             <Link href="/">
-              <LogoSvg fill="#000" />
+              <LogoSvg fill={scrolled ? '#000' : 'white'} />
             </Link>
           </div>
 
@@ -87,9 +103,11 @@ export function TopAppBar() {
             spacing={1}
             onClick={() => openNavMenu()}
             sx={{
-              border: 'thin solid black',
+              border: `thin solid ${scrolled ? '#000' : 'white'}`,
               padding: '.22rem .5rem .22rem .8rem',
               cursor: 'pointer',
+              color: scrolled ? '#000' : 'white',
+              transition: 'all ease 400ms',
             }}
           >
             <Typography>MENU</Typography>

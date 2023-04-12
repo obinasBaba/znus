@@ -1,6 +1,6 @@
 import React from 'react';
 import s from '@/scenes/AboutUs/Intro/intro.module.scss';
-import { Container, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import IconV from '@/public/assets/images/about/vission.svg';
 import IconM from '@/public/assets/images/about/mission.svg';
 import Image from 'next/image';
@@ -27,9 +27,9 @@ const our = [
 const Intro = () => {
   return (
     <div className={s.container}>
-      <div className={s.bg} />
+      <div className={s.wrapper}>
+        <div className={s.bg} />
 
-      <Container maxWidth={'xxl' as any} className={s.wrapper}>
         <div className={s.about}>
           <div className={s.us_img}>
             <Image src={AboutImg} alt="about us" />
@@ -73,25 +73,29 @@ const Intro = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className={s.services}>
-          <aside>
-            <Typography variant="h4" className={s.text_title}>
-              WE PROVIDE HIGH QUALITY SERVICES
-            </Typography>
-            <Typography variant="body1" className={s.desc}>
-              As passionate entrepreneurs, but most importantly as family
-              members and responsible citizens, we believe that the cornerstone
-              of any business must rely on benefiting society while offering a
-              transparent solution.
-            </Typography>
-          </aside>
+      <div className={s.services}>
+        <aside>
+          <Typography variant="h3" className={s.text_title} gutterBottom>
+            We Provide High Quality Services
+          </Typography>
+          <Typography variant="body1" className={s.desc}>
+            Lorem ipsum dolor sit amet consectetur. Urna tortor mauris sodales
+            cras id lectus felis ut orci. Diam nec facilisis bibendum amet
+            ornare adipiscing vestibulum donec faucibus. Tincidunt tortor felis
+            risus donec gravida. <br /> <br /> Tor tor sollicitudin rhoncus
+            molestie bibendum arcu non. Felis auctor lobortis mattis urna in
+            risus sed. Amet turpis elementum ut dolor. Cras elementum vestibulum
+            et massa in pharetra aliquet sit. Nam purus ac sagittis ultricies
+            gravida elit in est. Et netus suspendisse urna cursus elementum.
+          </Typography>
+        </aside>
 
-          <div className={s.circle_img}>
-            <Image src={CircleImg} alt="circle service image" />
-          </div>
+        <div className={s.circle_img}>
+          <Image src={CircleImg} alt="circle service image" />
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

@@ -37,17 +37,28 @@
         position: absolute;
         width: 100%;
         height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         //border: 11px solid yellow;
 
 
-        img{
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-          max-width: 100%;
-          pointer-events: none;
+        .img{
+          max-height: 100%;
+          height: 100vh;
+          //border: 1px solid red;
+
+          img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            pointer-events: none;
+          }
         }
+
       }
+
       .btns{
         position: absolute;
         top: calc(50% - 5rem);
