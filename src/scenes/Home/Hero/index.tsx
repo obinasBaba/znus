@@ -71,8 +71,10 @@ const Hero = () => {
           >
             <Swiper
               loop
-              autoplay
-              speed={1000}
+              autoplay={{
+                delay: 6000,
+              }}
+              speed={1400}
               slidesPerView={1}
               modules={[Autoplay, Pagination, Navigation]}
               className={clsx([s.swiper, 'mySwiper'])}

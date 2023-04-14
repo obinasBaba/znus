@@ -10,45 +10,24 @@
   & :local {
 
     .wrapper {
-      margin-top: 8rem;
+      margin-top: 10rem;
       max-width: 80rem;
 
-      & > :first-child{
-        margin: 0 auto;
-        //border: 1px solid red;
 
-        @include s.media-breakpoint-up(xxl){
-          //max-width: 86%;
-
-        }
-      }
-
-      .social_cards {
-        width: 100%;
+      .title_txt_sub {
         display: flex;
-        gap: 1.5rem;
-        margin: 1rem auto 0;
+        gap: .5rem;
+        letter-spacing: .2vmax;
+        text-transform: uppercase;
 
-        .card_wrapper {
-          padding: 3rem;
-          background-color: #F5F9FF;
-          flex: 1;
+        margin-bottom: 1rem;
 
-          .card {
-            display: flex;
-            flex-flow: column;
-            padding: 1.5rem;
-            gap: 1.5rem;
-            background-color: white;
-            box-shadow: 0 2px 3px 1px hsla(0, 0%, 57.3%, 0.12);
 
-            .social_desc{
-              font-size: 1.2rem;
-              color: gray;
-            }
-          }
+        span {
+          color: s.$clrs-accent;
         }
       }
+
     }
   }
 }

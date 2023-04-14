@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './contactform.module.scss';
-import { Container, InputLabel, TextField } from '@mui/material';
+import { Button, Container, InputLabel, TextField } from '@mui/material';
+import { Send } from '@mui/icons-material';
 
 const ContactForm = () => {
   return (
@@ -34,18 +35,6 @@ const ContactForm = () => {
 
           <div className={s.field}>
             <InputLabel htmlFor="filled-hidden-label-normal">
-              Company Name
-            </InputLabel>
-            <TextField
-              fullWidth
-              hiddenLabel
-              placeholder="Your company name here"
-              id="filled2d-hidden-label-normal"
-              variant="filled"
-            />
-          </div>
-          <div className={s.field}>
-            <InputLabel htmlFor="filled-hidden-label-normal">
               Subject
             </InputLabel>
             <TextField
@@ -70,6 +59,9 @@ const ContactForm = () => {
               rows={4}
             />
           </div>
+          <Button startIcon={<Send />} variant="outlined">
+            Submit
+          </Button>
         </form>
       </Container>
     </div>

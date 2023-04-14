@@ -49,7 +49,7 @@ function HideOnScroll(props: Props) {
         setTrigger(false);
         appBarScrollState.set('down');
       }
-    }, 300);
+    }, 50);
 
     // scrollDirection.onChange(debouncedResponse);
     scrollDirection.on('change', debouncedResponse);
@@ -80,7 +80,7 @@ export function TopAppBar() {
       if (yAmount > 400) {
         setScrolled(true);
       } else setScrolled(false);
-    }, 300);
+    }, 50);
 
     y.on('change', debouncedResponse);
 

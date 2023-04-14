@@ -1,0 +1,68 @@
+@use '@/styles/index.scss' as s;
+
+.container {
+  position: relative;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  height: 22vmax;
+  overflow: hidden;
+
+  background: linear-gradient(90deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%);
+
+
+  & :local {
+
+    .path_bottom, .path_top {
+      position: absolute;
+
+      img {
+        width: 100%;
+        display: block;
+        //object-fit: cover;
+        mix-blend-mode: luminosity;
+      }
+    }
+
+    .path_bottom {
+      left: 0;
+      bottom: 0;
+    }
+
+    .path_top {
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      //border: 1px solid red;
+      img{
+        height: 100%;
+      }
+    }
+
+
+    .wrapper {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      align-self: end;
+      margin-bottom: 3vmax;
+
+      //border: 1px solid blue;;
+
+      .text {
+        color: white;
+        //display: none;
+
+        & > * {
+          text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        h5 {
+          //font-size: 1.3rem;
+          font-weight: 400 !important;
+          text-shadow: 0 4px 4px rgba(0, 0, 0, 0.35);
+        }
+      }
+    }
+  }
+}

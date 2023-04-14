@@ -1,8 +1,9 @@
 @use '@/styles/index.scss' as s;
 
 .container{
-  width: 100%;
-  margin-top: 6rem;
+  //width: 100%;
+  flex: 1;
+  //margin-top: 6rem;
 
   // @include s.margin(top, 10rem);
   // @include s.padding(bottom, 8rem);
@@ -18,9 +19,10 @@
       //border: 1px solid red;
 
       .form{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        display: flex;
+        flex-flow: column;
+        //grid-template-columns: 1fr 1fr;
+        gap: 1rem;
 
         .field{
           width: 100%;
@@ -37,8 +39,11 @@
           //border: 1px solid red;
         }
 
-        & > :last-child{
-          grid-column: 1 / 3;
+        button{
+          align-self: flex-start;
+          width: 100%;
+          max-width: 10rem;
+          margin-top: 2rem;
         }
       }
     }
