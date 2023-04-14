@@ -31,6 +31,34 @@
         align-self: flex-start;
         margin-top: 10vmax;
         color: white;
+        //border: 1px solid red;
+
+        .swapping_txt_wrapper{
+          position: relative;
+          display: inline-flex;
+          //padding: .3rem;
+          //border: 1px solid yellow;
+          //overflow: hidden;
+          max-height: 3vmax;
+
+          .text_swiper{
+            //border: 1px solid black;
+            height: auto;
+            width: 110% ;
+            i{
+              width: max-content;
+            }
+          }
+        }
+
+        .swapping_txt{
+          //position: absolute;
+          display: inline-flex;
+          border: 1px solid red;
+          flex-flow: column;
+          height: max-content;
+          transform: translateY(-66.6666%);
+        }
       }
 
       .content{

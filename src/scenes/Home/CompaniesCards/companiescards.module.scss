@@ -2,7 +2,8 @@
 
 .container {
   width: 100%;
-  margin: 8rem 0;
+  padding: 8rem 0 4rem;
+  //border: 1px solid red;
 
   // @include s.margin(top, 10rem);
   // @include s.padding(bottom, 8rem);
@@ -23,9 +24,17 @@
         .c_img{
           max-width: 30rem;
           //border: 1px solid red;
-          img {
-            display: block;
-            object-fit: cover;
+
+        }
+
+        .title_txt_sub {
+          display: flex;
+          gap: .5rem;
+          letter-spacing: .2vmax;
+          text-transform: uppercase;
+
+          span {
+            color: s.$clrs-accent;
           }
         }
       }

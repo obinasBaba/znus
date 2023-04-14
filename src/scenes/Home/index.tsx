@@ -17,9 +17,11 @@ const Home = () => {
 
       <Missions />
 
-      <CompaniesCards />
+      <div className="company_info_container">
+        <CompaniesCards />
 
-      <Companies />
+        <Companies />
+      </div>
 
       <Video />
 

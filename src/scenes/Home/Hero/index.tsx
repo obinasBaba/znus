@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './hero.module.scss';
 
 import HeroImg1 from '@/public/assets/images/hero/hero-image.png';
 import HeroImg2 from '@/public/assets/images/hero/hero-image.png';
 import HeroImg3 from '@/public/assets/images/hero/hero-image.png';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 import { wrap } from '@/util/helpers';
 import { IconButton, Typography } from '@mui/material';
 import { ChevronLeftSharp, ChevronRightSharp } from '@mui/icons-material';
@@ -50,16 +50,52 @@ const Hero = () => {
   const [[page, direction], setPage] = useState([0, 0]);
   const [images, setImages] = useState(heroImages);
   const imageIndex = wrap(0, images.length, page);
+  const [scope, animate] = useAnimate();
 
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-  };
+  useEffect(() => {
+    return;
+    animate(
+      '.swapping_text',
+      { y: ['0%', '-33.333%', '-66.6666%', '0%'] },
+      {
+        duration: 7,
+        ease: 'easeInOut',
+        times: [0, 0.3, 0.6, 0, 0],
+        repeat: Infinity,
+        repeatDelay: 0,
+      },
+    );
+  }, []);
 
   return (
-    <div className={s.container}>
+    <div className={s.container} ref={scope}>
       <div className={s.wrapper}>
         <Typography variant="h2" className={s.text}>
-          Let’s Collaborate and <br /> <i>Grow</i> Your Business
+          Let’s Collaborate and <br />
+          <div className={s.swapping_txt_wrapper}>
+            <Swiper
+              loop
+              direction="vertical"
+              autoplay={{
+                delay: 2000,
+              }}
+              speed={2400}
+              slidesPerView={1}
+              modules={[Autoplay]}
+              className={clsx([s.text_swiper])}
+            >
+              <SwiperSlide>
+                <i>Grow</i>
+              </SwiperSlide>
+              <SwiperSlide>
+                <i>Build</i>
+              </SwiperSlide>
+              <SwiperSlide>
+                <i>Work</i>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          {'  '} Your Business
         </Typography>
 
         <AnimatePresence initial={false} custom={direction}>

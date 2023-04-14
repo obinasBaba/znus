@@ -154,7 +154,7 @@ const OurCompanies = () => {
             </div>
 
             <Typography variant="h6" className={s.section_no}>
-              <b>{activeSection}</b>
+              <b>0{activeSection}</b>
               <i>/03</i>
             </Typography>
           </aside>
